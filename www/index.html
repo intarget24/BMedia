@@ -130,6 +130,17 @@
                         <div class="right"></div>
                     </div>
 
+                    <div class="navbar-inner cached" data-page="orderMissings">
+                        <div class="left sliding">
+                            <a href="#orders" class="link back">
+                                <i class="icon icon-back"></i><span>Atrás</span>
+                            </a>
+                        </div>
+                        <div class="center sliding">Faltantes</div>
+                        <div class="right"></div>
+                    </div>
+
+
                 </div>
                 <!--Seccion de paginas -->
                 <div class="pages navbar-through toolbar-through">
@@ -179,6 +190,15 @@
                     <div data-page="clients" class="page cached">
                         <!-- Scrollable page content-->
                         <div class="page-content">
+                            <!-- Search Bar -->
+                            <form data-search-list=".list-block-search" data-search-in=".item-title" class="searchbar searchbar-init">
+                                <div class="searchbar-input">
+                                    <input type="search" placeholder="Search"><a href="#" class="searchbar-clear"></a>
+                                </div><a href="#" class="searchbar-cancel">Cancel</a>
+                            </form>
+
+                            <!-- Search Bar overlay -->
+                            <div class="searchbar-overlay"></div>
                             <div class="content-block-title">Clientes</div>
                             <div class="list-block media-list">
                                 <ul>
@@ -260,11 +280,45 @@
                                 </div>
                                 <div class="card-footer">
                                     <a href="#" ng-click="ShowItems(order)" class="link">Ver Partidas</a>
+                                    <a href="#" ng-click="ShowMissings(order)" class="link">Detalle Faltantes</a>
                                 </div>
                             </div>
 
                         </div>
                     </div>
+
+                    <div data-page="orderMissings" class="page cached">
+                        <!-- Scrollable page content-->
+                        <div class="page-content">
+
+                            <div class="content-block">
+                                <div class="content-block-inner">
+                                    Cliente: {{currentClient.name}} , Vendedor: {{currentClient.vendor}} , Campaña: {{currentContract.campaing}}, Orden : {{currentOrder.numOrder}}
+                                </div>
+                            </div>
+
+                            <div class="card facebook-card" ng-repeat="missing in missings">
+                                <div class="card-header">
+                                    <div class="facebook-name">Versión:  {{missing.version}}</div>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-content-inner">
+                                        <p>Diferencia: {{missing.quantityMissing}}</p>
+                                        <canvas id="bar" class="chart chart-bar"
+                                                chart-data="missing.dataMissings" chart-labels="labelsBars" chart-series="seriesBars">
+                                        </canvas>
+                                        <p class="color-gray">La información presentada es solo con fines de simulación</p>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <!--<a href="#" ng-click="ShowItems(order)" class="link">Ver Partidas</a>
+                                    <a href="#" ng-click="ShowItems(order)" class="link">Detalle Faltantes</a>-->
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
 
                     <div data-page="orderItems" class="page cached">
                         <!-- Scrollable page content-->
@@ -277,15 +331,14 @@
                             </div>
                             <div class="list-block media-list">
                                 <ul>
-                                    <li ng-repeat="contract in currentContracts">
-                                        <a href="#" ng-click="viewOrders(contract)" class="item-link item-content">
+                                    <li ng-repeat="item in items">
+                                        <a href="#" ng-click="viewProducts(item)" class="item-link item-content">
                                             <div class="item-inner">
                                                 <div class="item-title-row">
-                                                    <div class="item-title">Campaña: {{contract.campaing}}</div>
-                                                    <div class="item-after">Fecha: {{contract.date}}</div>
+                                                    <div class="item-title">Nombre: {{item.name}}</div>
+                                                    <div class="item-after">Cantidad: {{item.quantity}}</div>
                                                 </div>
-                                                <div class="item-subtitle">Periodo: {{contract.period}}</div>
-                                                <div class="item-text">Monto: {{contract.amount}}</div>
+                                                <div class="item-subtitle">Tarifa: ${{item.amount}}</div>
                                             </div>
                                         </a>
                                     </li>
@@ -293,6 +346,7 @@
                             </div>
                         </div>
                     </div>
+
 
                 </div>
             </div>

@@ -95,6 +95,14 @@ Myapp.angular.controller('general', function ($scope, $http) {
     $scope.labels = ["Transmitidos", "Por transmitir","Faltantes"];
     $scope.data = [35, 65, 54];
 
+    $scope.labelsBars = ["Spots"];
+    $scope.seriesBars = ['Pautados', 'Transmitidos'];
+
+    $scope.dataBars = [
+        [65],
+        [28]
+    ];
+
 
     $scope.orders = [
         {numOrder: 1,date: '18/02/16', period:'1/01/16 - 20/02/16', solicitedQuantity : 100,
@@ -109,6 +117,22 @@ Myapp.angular.controller('general', function ($scope, $http) {
             weightTotals: 30, dataSpots: [76,67,56], asertivity:65 },
         {numOrder: 6,date: '18/02/16', period:'1/01/16 - 20/02/16', solicitedQuantity : 32,
             weightTotals: 30, dataSpots: [32,5,12], asertivity:32 }
+    ];
+
+    $scope.missings = [
+        {version: 3, dataMissings: [[65],[45]], quantityMissing: 100},
+        {version: 4, dataMissings: [[45],[32]], quantityMissing: 122},
+        {version: 6, dataMissings: [[23],[76]], quantityMissing: 80},
+        {version: 8, dataMissings: [[54],[43]], quantityMissing: 96},
+        {version: 3, dataMissings: [[12],[23]], quantityMissing: 54},
+        {version: 1, dataMissings: [[76],[87]], quantityMissing: 43},
+
+    ];
+
+    $scope.items = [
+        { name: 'Partida 1' , quantity: 35, amount: 34.5},
+        { name: 'Partida 2' , quantity: 23, amount: 23.5},
+        { name: 'Partida 3' , quantity: 65, amount: 64.5}
     ];
 
     //item:[{quantity: 2, amount: 78.00},{quantity: 3, amount: 78.00}]}
@@ -145,8 +169,17 @@ Myapp.angular.controller('general', function ($scope, $http) {
     }
 
     $scope.currentOrder = {};
+    $scope.ShowMissings = function(order)
+    {
+        $scope.currentOrder = order;
+        navigation.mainView.router.load({pageName:'orderMissings'});
+    }
+
+
     $scope.ShowItems = function(order) {
         $scope.currentOrder = order;
         navigation.mainView.router.load({pageName:'orderItems'});
     }
+
+    //$scope.current
 });
