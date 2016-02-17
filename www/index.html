@@ -89,6 +89,47 @@
                         <div class="right">
                         </div>
                     </div>
+
+                    <div class="navbar-inner cached" data-page="clients">
+                        <div class="left sliding">
+                            <a href="#login" class="link back">
+                                <i class="icon icon-back"></i><span>Atrás</span>
+                            </a>
+                        </div>
+                        <div class="center sliding">Clientes</div>
+                        <div class="right"></div>
+                    </div>
+
+                    <div class="navbar-inner cached" data-page="contracts">
+                        <div class="left sliding">
+                            <a href="#clients" class="link back">
+                                <i class="icon icon-back"></i><span>Atrás</span>
+                            </a>
+                        </div>
+                        <div class="center sliding">Contratos</div>
+                        <div class="right"></div>
+                    </div>
+
+                    <div class="navbar-inner cached" data-page="orders">
+                        <div class="left sliding">
+                            <a href="#contracts" class="link back">
+                                <i class="icon icon-back"></i><span>Atrás</span>
+                            </a>
+                        </div>
+                        <div class="center sliding">Ordenes</div>
+                        <div class="right"></div>
+                    </div>
+
+                    <div class="navbar-inner cached" data-page="orderItems">
+                        <div class="left sliding">
+                            <a href="#orders" class="link back">
+                                <i class="icon icon-back"></i><span>Atrás</span>
+                            </a>
+                        </div>
+                        <div class="center sliding">Partidas</div>
+                        <div class="right"></div>
+                    </div>
+
                 </div>
                 <!--Seccion de paginas -->
                 <div class="pages navbar-through toolbar-through">
@@ -96,20 +137,31 @@
                     <div data-page="login" class="page">
                         <!-- Scrollable page content-->
                         <div class="page-content">
-                            <div class="content-block-title">App StoryBoard Mock</div>
+                            <div class="content-block-title">Inicie Sesión</div>
                             <div class="content-block">
                                 <div class="content-block-inner">
-                                    <p>Esta es una pantalla de prueba</p>
+                                    <p>Escribe tu usuario y contraseña</p>
                                     <div class="list-block">
                                         <ul>
                                             <!-- Text inputs -->
                                             <li>
                                                 <div class="item-content">
-                                                    <div class="item-media"><i class="icon icon-form-toggle"></i></div>
+
                                                     <div class="item-inner">
-                                                        <div class="item-title label">UBICODE</div>
+                                                        <div class="item-title label">User</div>
                                                         <div class="item-input">
-                                                            <input type="text" placeholder="CÓDIGO" ng-model="ubicodeSession">
+                                                            <input type="text" placeholder="username" ng-model="user.name">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">Password</div>
+                                                        <div class="item-input">
+                                                            <input type="password" placeholder="password" ng-model="user.password">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -118,8 +170,126 @@
                                     </div>
 
                                     <p><a href="#" class="button  button-fill button-round color-green"
-                                          ng-click="ScanLogin()">ESCANEAR</a></p>
+                                          ng-click="LogIn()">Log In</a></p>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div data-page="clients" class="page cached">
+                        <!-- Scrollable page content-->
+                        <div class="page-content">
+                            <div class="content-block-title">Clientes</div>
+                            <div class="list-block media-list">
+                                <ul>
+                                    <li class="swipeout" ng-repeat="client in clients">
+                                        <div class="swipeout-content item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title-row">
+                                                    <div class="item-title">{{client.name}}</div>
+                                                </div>
+                                                <div class="item-subtitle">{{client.vendor}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="swipeout-actions-left">
+                                            <a href="#" class="action1 bg-pink">...</a>
+                                        </div>
+                                        <div class="swipeout-actions-right">
+                                            <a href="#" ng-click="viewContractDetail(client,1)" class="action1 bg-red">{{client.expired}}</a>
+                                            <a href="#" ng-click="viewContractDetail(client,2)" class="action2 bg-yellow ">{{client.warning}}</a>
+                                            <a href="#" ng-click="viewContractDetail(client,3)" class="action2 bg-green">{{client.success}}</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div data-page="contracts" class="page cached">
+                        <!-- Scrollable page content-->
+                        <div class="page-content">
+
+                            <div class="content-block">
+                                <div class="content-block-inner">
+                                     Cliente: {{currentClient.name}} , Vendedor: {{currentClient.vendor}}
+                                </div>
+                            </div>
+                            <div class="list-block media-list">
+                                <ul>
+                                    <li ng-repeat="contract in currentContracts">
+                                        <a href="#" ng-click="viewOrders(contract)" class="item-link item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title-row">
+                                                    <div class="item-title">Campaña: {{contract.campaing}}</div>
+                                                    <div class="item-after">Fecha: {{contract.date}}</div>
+                                                </div>
+                                                <div class="item-subtitle">Periodo: {{contract.period}}</div>
+                                                <div class="item-text">Monto: {{contract.amount}}</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div data-page="orders" class="page cached">
+                        <!-- Scrollable page content-->
+                        <div class="page-content">
+
+                            <div class="content-block">
+                                <div class="content-block-inner">
+                                    Cliente: {{currentClient.name}} , Vendedor: {{currentClient.vendor}} , Campaña: {{currentContract.campaing}}
+                                </div>
+                            </div>
+
+                            <div class="card facebook-card" ng-repeat="order in orders">
+                                <div class="card-header">
+                                    <div class="facebook-name">Numero de Orden:  {{order.numOrder}}</div>
+                                    <div class="facebook-date">Fecha: {{order.date}}</div>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-content-inner">
+                                        <p>Periodo: {{order.period}}</p>
+                                        <p>Totales en peso: {{order.weightTotals}}</p>
+                                        <canvas id="pie" class="chart chart-pie"
+                                                chart-data="order.dataSpots" chart-labels="labels" chart-legend="true">
+                                        </canvas>
+                                        <p class="color-gray">Cantidades Solicitadas: {{order.solicitedQuantity}} &#9;&#9;Porcentaje de Acertividad: {{order.asertivity}}%</p>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="#" ng-click="ShowItems(order)" class="link">Ver Partidas</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div data-page="orderItems" class="page cached">
+                        <!-- Scrollable page content-->
+                        <div class="page-content">
+
+                            <div class="content-block">
+                                <div class="content-block-inner">
+                                    Cliente: {{currentClient.name}} , Vendedor: {{currentClient.vendor}} , Campaña: {{currentContract.campaing}}, Orden : {{currentOrder.numOrder}}
+                                </div>
+                            </div>
+                            <div class="list-block media-list">
+                                <ul>
+                                    <li ng-repeat="contract in currentContracts">
+                                        <a href="#" ng-click="viewOrders(contract)" class="item-link item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title-row">
+                                                    <div class="item-title">Campaña: {{contract.campaing}}</div>
+                                                    <div class="item-after">Fecha: {{contract.date}}</div>
+                                                </div>
+                                                <div class="item-subtitle">Periodo: {{contract.period}}</div>
+                                                <div class="item-text">Monto: {{contract.amount}}</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
