@@ -107,7 +107,10 @@
                             </a>
                         </div>
                         <div class="center sliding">Contratos</div>
-                        <div class="right"></div>
+                        <div class="right">
+                            <!--<a href="#" data-picker=".filterContract-1" class="link open-picker">Filtros</a>-->
+                            <a href="#" data-popup=".popup-services" class="open-popup">Filtros </a>
+                        </div>
                     </div>
 
                     <div class="navbar-inner cached" data-page="orders">
@@ -117,7 +120,9 @@
                             </a>
                         </div>
                         <div class="center sliding">Ordenes</div>
-                        <div class="right"></div>
+                        <div class="right">
+                            <a href="#" data-popup=".orders-filters" class="open-popup">Filtros </a>
+                        </div>
                     </div>
 
                     <div class="navbar-inner cached" data-page="orderItems">
@@ -137,8 +142,11 @@
                             </a>
                         </div>
                         <div class="center sliding">Faltantes</div>
-                        <div class="right"></div>
+                        <div class="right">
+                            <a href="#" data-popup=".faltantes-popup" class="open-popup">Filtros </a>
+                        </div>
                     </div>
+
 
 
                 </div>
@@ -147,6 +155,7 @@
                     <!--Pagina de Login-->
                     <div data-page="login" class="page">
                         <!-- Scrollable page content-->
+
                         <div class="page-content">
                             <div class="content-block-title">Inicie Sesión</div>
                             <div class="content-block">
@@ -193,7 +202,7 @@
                             <!-- Search Bar -->
                             <form data-search-list=".list-block-search" data-search-in=".item-title" class="searchbar searchbar-init">
                                 <div class="searchbar-input">
-                                    <input type="search" placeholder="Search"><a href="#" class="searchbar-clear"></a>
+                                    <input type="search" placeholder="Nombre del Cliente"><a href="#" class="searchbar-clear"></a>
                                 </div><a href="#" class="searchbar-cancel">Cancel</a>
                             </form>
 
@@ -212,7 +221,7 @@
                                             </div>
                                         </div>
                                         <div class="swipeout-actions-left">
-                                            <a href="#" class="action1 bg-pink">...</a>
+                                            <a href="#" class="action1 bg-blue">...</a>
                                         </div>
                                         <div class="swipeout-actions-right">
                                             <a href="#" ng-click="viewContractDetail(client,1)" class="action1 bg-red">{{client.expired}}</a>
@@ -226,12 +235,24 @@
                     </div>
 
                     <div data-page="contracts" class="page cached">
+
+
+                        <form data-search-list=".list-block-search" data-search-in=".item-title" class="searchbar searchbar-init">
+                            <div class="searchbar-input">
+                                <input type="search" placeholder="Nombre Campaña"><a href="#" class="searchbar-clear"></a>
+                            </div><a href="#" class="searchbar-cancel">Cancel</a>
+                        </form>
+                        <div class="searchbar-overlay"></div>
+
                         <!-- Scrollable page content-->
                         <div class="page-content">
 
                             <div class="content-block">
                                 <div class="content-block-inner">
-                                     Cliente: {{currentClient.name}} , Vendedor: {{currentClient.vendor}}
+                                    <img src="img/red.png" style="width:5%; height:15px;" ng-show="color==1">
+                                    <img src="img/yellow.png" style="width:5%; height:15px;" ng-show="color==2">
+                                    <img src="img/green.png" style="width: 5%; height:15px;" ng-show="color==3">
+                                    Cliente: {{currentClient.name}} , Vendedor: {{currentClient.vendor}}
                                 </div>
                             </div>
                             <div class="list-block media-list">
@@ -239,6 +260,7 @@
                                     <li ng-repeat="contract in currentContracts">
                                         <a href="#" ng-click="viewOrders(contract)" class="item-link item-content">
                                             <div class="item-inner">
+
                                                 <div class="item-title-row">
                                                     <div class="item-title">Campaña: {{contract.campaing}}</div>
                                                     <div class="item-after">Fecha: {{contract.date}}</div>
@@ -256,9 +278,20 @@
                     <div data-page="orders" class="page cached">
                         <!-- Scrollable page content-->
                         <div class="page-content">
+                            <!-- Search Bar -->
+                            <form data-search-list=".list-block-search" data-search-in=".item-title" class="searchbar searchbar-init">
+                                <div class="searchbar-input">
+                                    <input type="search" placeholder="Numero de Orden"><a href="#" class="searchbar-clear"></a>
+                                </div><a href="#" class="searchbar-cancel">Cancel</a>
+                            </form>
 
+                            <!-- Search Bar overlay -->
+                            <div class="searchbar-overlay"></div>
                             <div class="content-block">
                                 <div class="content-block-inner">
+                                    <img src="img/red.png" style="width:5%; height:15px;" ng-show="color==1">
+                                    <img src="img/yellow.png" style="width:5%; height:15px;" ng-show="color==2">
+                                    <img src="img/green.png" style="width: 5%; height:15px;" ng-show="color==3">
                                     Cliente: {{currentClient.name}} , Vendedor: {{currentClient.vendor}} , Campaña: {{currentContract.campaing}}
                                 </div>
                             </div>
@@ -275,7 +308,8 @@
                                         <canvas id="pie" class="chart chart-pie"
                                                 chart-data="order.dataSpots" chart-labels="labels" chart-legend="true">
                                         </canvas>
-                                        <p class="color-gray">Cantidades Solicitadas: {{order.solicitedQuantity}} &#9;&#9;Porcentaje de Acertividad: {{order.asertivity}}%</p>
+                                        <p class="color-gray">Cantidades Solicitadas: {{order.solicitedQuantity}}</p>
+                                        <p class="color-gray">Porcentaje de Acertividad: {{order.asertivity}}%</p>
                                     </div>
                                 </div>
                                 <div class="card-footer">
@@ -293,6 +327,9 @@
 
                             <div class="content-block">
                                 <div class="content-block-inner">
+                                    <img src="img/red.png" style="width:5%; height:15px;" ng-show="color==1">
+                                    <img src="img/yellow.png" style="width:5%; height:15px;" ng-show="color==2">
+                                    <img src="img/green.png" style="width: 5%; height:15px;" ng-show="color==3">
                                     Cliente: {{currentClient.name}} , Vendedor: {{currentClient.vendor}} , Campaña: {{currentContract.campaing}}, Orden : {{currentOrder.numOrder}}
                                 </div>
                             </div>
@@ -319,13 +356,15 @@
                         </div>
                     </div>
 
-
                     <div data-page="orderItems" class="page cached">
                         <!-- Scrollable page content-->
                         <div class="page-content">
 
                             <div class="content-block">
                                 <div class="content-block-inner">
+                                    <img src="img/red.png" style="width:5%; height:15px;" ng-show="color==1">
+                                    <img src="img/yellow.png" style="width:5%; height:15px;" ng-show="color==2">
+                                    <img src="img/green.png" style="width: 5%; height:15px;" ng-show="color==3">
                                     Cliente: {{currentClient.name}} , Vendedor: {{currentClient.vendor}} , Campaña: {{currentContract.campaing}}, Orden : {{currentOrder.numOrder}}
                                 </div>
                             </div>
@@ -347,13 +386,171 @@
                         </div>
                     </div>
 
+                    <div data-page="products" class="page cached">
+                        <!-- Scrollable page content-->
+                        <div class="page-content">
+                            <!-- Search Bar -->
+                            <form data-search-list=".list-block-search" data-search-in=".item-title" class="searchbar searchbar-init">
+                                <div class="searchbar-input">
+                                    <input type="search" placeholder="Nombre Producto"><a href="#" class="searchbar-clear"></a>
+                                </div><a href="#" class="searchbar-cancel">Cancel</a>
+                            </form>
+
+                            <!-- Search Bar overlay -->
+                            <div class="searchbar-overlay"></div>
+                            <div class="content-block">
+                                <div class="content-block-inner">
+                                    <img src="img/red.png" style="width:5%; height:15px;" ng-show="color==1">
+                                    <img src="img/yellow.png" style="width:5%; height:15px;" ng-show="color==2">
+                                    <img src="img/green.png" style="width: 5%; height:15px;" ng-show="color==3">
+                                    Cliente: {{currentClient.name}} , Vendedor: {{currentClient.vendor}} , Campaña: {{currentContract.campaing}}, Orden : {{currentOrder.numOrder}}, Partida : {{currentItem.name}}
+                                </div>
+                            </div>
+                            <div class="list-block media-list">
+                                <ul>
+                                    <li ng-repeat="product in products">
+                                        <label class="label-radio item-content">
+                                            <input type="checkbox" onclick="return false" ng-model="product.isTranmited">
+                                            <div class="item-inner">
+                                                <div class="item-title-row">
+                                                    <div class="item-title">Nombre: {{product.name}}</div>
+                                                    <div class="item-after">Transmitido</div>
+                                                </div>
+                                                <div class="item-subtitle">Bloque: {{product.block}}</div>
+                                                <div class="item-subtitle">Horario: {{product.hour}}</div>
+                                                <div class="item-text">Tipo: {{product.type}}</div>
+                                            </div>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
 
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Services Popup -->
+    <div class="popup popup-services">
+        <div class="content-block">
+            <p>Selecciona los filtros</p>
+            <p><a href="#" class="close-popup">Aplicar</a></p>
+            <div class="list-block">
+                <ul>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    Fecha: <input type="text" placeholder="Selecciona una fecha" readonly id="calendar-default">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    Monto Minimo {{minamount}}
+                                    <div class="range-slider">
+                                        <input type="range" min="0" max="100" value="0" step="1" ng-model="minamount">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    Monto Maximo {{maxamount}}
+                                    <div class="range-slider">
+                                        <input type="range" min="0" max="100" value="100" step="1" ng-model="maxamount">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
+    <!-- Orders Popup -->
+    <div class="popup orders-filters">
+        <div class="content-block">
+            <p>Selecciona los filtros</p>
+            <p><a href="#" class="close-popup">Aplicar</a></p>
+            <div class="list-block">
+                <ul>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    Fecha: <input type="text" placeholder="Selecciona una fecha" readonly id="calendar-default2">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    Porcentaje de Acertividad {{percentAcertivity}}%
+                                    <div class="range-slider">
+                                        <input type="range" min="0" max="100" value="0" step="1" ng-model="percentAcertivity">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Faltantes Popup -->
+    <div class="popup faltantes-popup">
+        <div class="content-block">
+            <p>Selecciona los filtros</p>
+            <p><a href="#" class="close-popup">Aplicar</a></p>
+            <div class="list-block">
+                <ul>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    Diferencia Minima {{mindif}}
+                                    <div class="range-slider">
+                                        <input type="range" min="0" max="100" value="0" step="1" ng-model="mindif">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"></div>
+                            <div class="item-inner">
+                                <div class="item-input">
+                                    Diferencia Maxima {{maxdif}}
+                                    <div class="range-slider">
+                                        <input type="range" min="0" max="100" value="100" step="1" ng-model="maxdif">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
         <script type="text/javascript">
             //app.initialize();

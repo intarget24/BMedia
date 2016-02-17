@@ -16,8 +16,17 @@ window.onload = function() {
 navigation.fw = new Framework7();
 navigation.$$ = Dom7;
 
+
 Myapp.angular = angular.module('StoryBoardApp', ['chart.js']);
 Myapp.angular.controller('general', function ($scope, $http) {
+
+    var calendarDefault = navigation.fw.calendar({
+        input: '#calendar-default',
+    });
+
+    var calendarDefault2 = navigation.fw.calendar({
+        input: '#calendar-default2',
+    });
 
     $scope.rol = null;
     $scope.user = {};
@@ -135,6 +144,19 @@ Myapp.angular.controller('general', function ($scope, $http) {
         { name: 'Partida 3' , quantity: 65, amount: 64.5}
     ];
 
+    $scope.products = [
+        {type: 'spot', name: 'Navideño', block: 1, isTranmited: true, hour: '13:00hrs'},
+        {type: 'spot', name: 'Aceites 1', block: 1, isTranmited: true, hour: '13:01hrs'},
+        {type: 'mencion', name: 'Llantas 3', block: 2, isTranmited: false, hour: '13:02hrs'},
+        {type: 'spot', name: 'Paletas Payaso', block: 3, isTranmited: true, hour: '13:03hrs'},
+        {type: 'grabacion', name: 'Telcel es la red', block: 3, isTranmited: false, hour: '13:04hrs'},
+        {type: 'mencion', name: 'Vaporub', block: 4, isTranmited: false, hour: '13:05hrs'},
+        {type: 'spot', name: 'Nucita', block: 4, isTranmited: true, hour: '13:06hrs'},
+        {type: 'grabacion', name: 'Windows 10', block: 5, isTranmited: false, hour: '13:07hrs'},
+        {type: 'mencion', name: 'Chocolates Ferrero', block: 6, isTranmited: true, hour: '13:08hrs'},
+        {type: 'spot', name: 'Cinepolis', block: 6, isTranmited: false, hour: '13:09hrs'},
+    ];
+
     //item:[{quantity: 2, amount: 78.00},{quantity: 3, amount: 78.00}]}
     $scope.LogIn = function()
     {
@@ -148,6 +170,7 @@ Myapp.angular.controller('general', function ($scope, $http) {
     $scope.viewContractDetail = function(client,type){
         $scope.currentClient = client;
         navigation.mainView.router.load({pageName:'contracts'});
+        $scope.color = type;
         switch(type)
         {
             case 1:
@@ -180,6 +203,13 @@ Myapp.angular.controller('general', function ($scope, $http) {
         $scope.currentOrder = order;
         navigation.mainView.router.load({pageName:'orderItems'});
     }
+
+    $scope.currentItem = {};
+    $scope.viewProducts = function(item) {
+        $scope.currentItem = item;
+        navigation.mainView.router.load({pageName: 'products'});
+    }
+
 
     //$scope.current
 });
